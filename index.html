@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For Didi 🤍</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: radial-gradient(ellipse at bottom, #1a2a3a 0%, #050b12 100%);
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* Soft floating lights */
+    .lights {
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,0.6), transparent),
+        radial-gradient(2px 2px at 70% 40%, rgba(255,220,180,0.5), transparent),
+        radial-gradient(2px 2px at 50% 80%, rgba(200,220,255,0.5), transparent);
+      background-size: 300px 300px;
+      animation: floatLights 80s linear infinite;
+      opacity: 0.5;
+    }
+
+    @keyframes floatLights {
+      from { transform: translateY(0); }
+      to { transform: translateY(-800px); }
+    }
+
+    .card {
+      position: relative;
+      max-width: 520px;
+      width: 92%;
+      background: linear-gradient(135deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06));
+      backdrop-filter: blur(14px);
+      border-radius: 24px;
+      padding: 36px 28px 28px;
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
+      z-index: 1;
+    }
+
+    /* Soft closing glow */
+    .card.glow::after {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      border-radius: 26px;
+      background: radial-gradient(circle at center, rgba(255,235,200,0.45), rgba(200,220,255,0.25), transparent 75%);
+      opacity: 0;
+      animation: softGlow 3s ease forwards;
+      pointer-events: none;
+    }
+
+    @keyframes softGlow {
+      0% { opacity: 0; }
+      40% { opacity: 0.35; }
+      100% { opacity: 0.25; }
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+
+    h2 {
+      text-align: center;
+      font-weight: 300;
+      margin-bottom: 26px;
+      color: #d0dbe4;
+      font-size: 1.1rem;
+    }
+
+    .para {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .9s ease, transform .9s ease;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 18px;
+      text-align: center;
+      color: #eef2f6;
+    }
+
+    .para.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .signature {
+      margin-top: 24px;
+      text-align: right;
+      font-style: italic;
+      color: #c6d2db;
+      font-size: .95rem;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    .signature.show {
+      opacity: 1;
+    }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 1.9rem; }
+      .para { font-size: 1rem; }
+      .card { padding: 30px 22px 22px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="lights"></div>
+
+  <div class="card" id="card">
+    <h1>Didi</h1>
+    <h2>An end-of-year thank you</h2>
+
+    <p class="para">As 2025 comes to an end, I just want to pause and say thank you, Didi.</p>
+
+    <p class="para">For always being there — with advice, with patience, and with the kind of care that feels steady and safe.</p>
+
+    <p class="para">This year taught me many things, but one thing stayed constant: knowing I had you to look up to.</p>
+
+    <p class="para">I may not say it often, but your presence, your strength, and your support mean more to me than words can fully explain.</p>
+
+    <p class="para"> Usher out the old, and ring in the new! ...</p>
+
+    <div class="signature">— With love and respect</div>
+  </div>
+
+  <script>
+    const paras = document.querySelectorAll('.para');
+    const signature = document.querySelector('.signature');
+    const card = document.getElementById('card');
+
+    paras.forEach((p, i) => {
+      setTimeout(() => {
+        p.classList.add('show');
+        if (i === paras.length - 1) {
+          setTimeout(() => {
+            signature.classList.add('show');
+            setTimeout(() => card.classList.add('glow'), 800);
+          }, 1200);
+        }
+      }, 1400 * i);
+    });
+  </script>
+</body>
+</html>
